@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期二-五月-23-2017   
+--  文件已创建 - 星期三-五月-24-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table ACCOUNT
@@ -9,7 +9,8 @@
    (	"USERNAME" VARCHAR2(20 BYTE), 
 	"PASSWORD" VARCHAR2(20 BYTE), 
 	"USERID" NUMBER(10,0), 
-	"ROLE" NUMBER(3,0) DEFAULT 10
+	"ROLE" NUMBER(3,0) DEFAULT 10, 
+	"LATEST_LOGIN" DATE
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -17,8 +18,8 @@
   TABLESPACE "BBSTS" ;
 REM INSERTING into BBS.ACCOUNT
 SET DEFINE OFF;
-Insert into BBS.ACCOUNT (USERNAME,PASSWORD,USERID,ROLE) values ('lys','lys',3,10);
-Insert into BBS.ACCOUNT (USERNAME,PASSWORD,USERID,ROLE) values ('test2','test2',2,10);
+Insert into BBS.ACCOUNT (USERNAME,PASSWORD,USERID,ROLE,LATEST_LOGIN) values ('lyk','lyk',3,10,null);
+Insert into BBS.ACCOUNT (USERNAME,PASSWORD,USERID,ROLE,LATEST_LOGIN) values ('test2','test2',2,10,null);
 --------------------------------------------------------
 --  DDL for Index ACCOUNT_PK
 --------------------------------------------------------
