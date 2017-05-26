@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期四-五月-25-2017   
+--  文件已创建 - 星期六-五月-27-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table POST
@@ -16,7 +16,9 @@
 	"STATUS" NUMBER(1,0) DEFAULT 0, 
 	"FLOOR" NUMBER(10,0) DEFAULT 1, 
 	"POST_USER" NUMBER(10,0), 
-	"UPDATE_TIME" DATE
+	"UPDATE_TIME" DATE, 
+	"REWARDS" NUMBER(3,0), 
+	"NAME" VARCHAR2(20 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -45,9 +47,14 @@
    COMMENT ON COLUMN "POST"."POST_USER" IS '发布者';
  
    COMMENT ON COLUMN "POST"."UPDATE_TIME" IS '最后更新时间';
+ 
+   COMMENT ON COLUMN "POST"."REWARDS" IS '悬赏分';
+ 
+   COMMENT ON COLUMN "POST"."NAME" IS '发布人姓名';
 REM INSERTING into POST
 SET DEFINE OFF;
-Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME) values (1,'<p>改改改</p>','烦烦烦',to_date('25-5月 -17','DD-MON-RR'),'[]',0,0,0,1,3,to_date('25-5月 -17','DD-MON-RR'));
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME) values (2,'<p>test</p>','test',to_date('26-5月 -17','DD-MON-RR'),'["10500","15100"]',106,0,0,1,3,to_date('26-5月 -17','DD-MON-RR'),25,'lyk');
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME) values (3,'<p>dsgsdgsdgggggggggggggggggggggggggggggggggggg</p>','111111',to_date('26-5月 -17','DD-MON-RR'),'[]',7,1,0,1,3,to_date('26-5月 -17','DD-MON-RR'),50,'lyk111');
 --------------------------------------------------------
 --  DDL for Index POST_PK
 --------------------------------------------------------
@@ -78,6 +85,10 @@ Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST
   ALTER TABLE "POST" MODIFY ("POST_USER" NOT NULL ENABLE);
  
   ALTER TABLE "POST" MODIFY ("UPDATE_TIME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "POST" MODIFY ("REWARDS" NOT NULL ENABLE);
+ 
+  ALTER TABLE "POST" MODIFY ("NAME" NOT NULL ENABLE);
 --------------------------------------------------------
 --  DDL for Trigger TRIGGER_POST
 --------------------------------------------------------

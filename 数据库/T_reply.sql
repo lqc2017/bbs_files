@@ -1,0 +1,89 @@
+--------------------------------------------------------
+--  文件已创建 - 星期六-五月-27-2017   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table REPLY
+--------------------------------------------------------
+
+  CREATE TABLE "REPLY" 
+   (	"ID" NUMBER(14,0), 
+	"POST_ID" NUMBER(14,0), 
+	"CITE_ID" NUMBER(14,0) DEFAULT NULL, 
+	"CONTENT" VARCHAR2(2000 BYTE), 
+	"REPLY_TIME" DATE, 
+	"REPLY_USER" NUMBER(14,0), 
+	"NAME" VARCHAR2(50 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "BBSTS" ;
+ 
+
+   COMMENT ON COLUMN "REPLY"."ID" IS '回复主键';
+ 
+   COMMENT ON COLUMN "REPLY"."POST_ID" IS '帖子外键';
+ 
+   COMMENT ON COLUMN "REPLY"."CITE_ID" IS '引用外键';
+ 
+   COMMENT ON COLUMN "REPLY"."CONTENT" IS '回复内容';
+ 
+   COMMENT ON COLUMN "REPLY"."REPLY_TIME" IS '回复时间';
+ 
+   COMMENT ON COLUMN "REPLY"."REPLY_USER" IS '回复人ID';
+ 
+   COMMENT ON COLUMN "REPLY"."NAME" IS '回复人姓名';
+REM INSERTING into REPLY
+SET DEFINE OFF;
+Insert into REPLY (ID,POST_ID,CITE_ID,CONTENT,REPLY_TIME,REPLY_USER,NAME) values (23,3,null,'<p>點點滴滴</p>',to_date('26-5月 -17','DD-MON-RR'),3,'lyk111');
+--------------------------------------------------------
+--  DDL for Index REPLY_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "REPLY_PK" ON "REPLY" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "BBSTS" ;
+--------------------------------------------------------
+--  Constraints for Table REPLY
+--------------------------------------------------------
+
+  ALTER TABLE "REPLY" ADD CONSTRAINT "REPLY_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "BBSTS"  ENABLE;
+ 
+  ALTER TABLE "REPLY" MODIFY ("ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "REPLY" MODIFY ("POST_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "REPLY" MODIFY ("CONTENT" NOT NULL ENABLE);
+ 
+  ALTER TABLE "REPLY" MODIFY ("REPLY_TIME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "REPLY" MODIFY ("REPLY_USER" NOT NULL ENABLE);
+ 
+  ALTER TABLE "REPLY" MODIFY ("NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table REPLY
+--------------------------------------------------------
+
+  ALTER TABLE "REPLY" ADD CONSTRAINT "REPLY_FK1" FOREIGN KEY ("CITE_ID")
+	  REFERENCES "REPLY" ("ID") ON DELETE CASCADE ENABLE;
+ 
+  ALTER TABLE "REPLY" ADD CONSTRAINT "REPLY_FK2" FOREIGN KEY ("POST_ID")
+	  REFERENCES "POST" ("ID") ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TRIGGER_REPLY
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "TRIGGER_REPLY" 
+BEFORE INSERT ON REPLY 
+FOR EACH ROW 
+  WHEN (new.id is null) BEGIN
+  select sequence_reply.nextval into :new.id from dual;
+END;
+/
+ALTER TRIGGER "TRIGGER_REPLY" ENABLE;
