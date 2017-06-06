@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期六-五月-27-2017   
+--  文件已创建 - 星期二-六月-06-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table POST
@@ -18,7 +18,9 @@
 	"POST_USER" NUMBER(10,0), 
 	"UPDATE_TIME" DATE, 
 	"REWARDS" NUMBER(3,0), 
-	"NAME" VARCHAR2(20 BYTE)
+	"NAME" VARCHAR2(20 BYTE), 
+	"ACCEPT_ID" NUMBER(14,0) DEFAULT 0, 
+	"REMINDER" NUMBER(10,0) DEFAULT 0
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -51,10 +53,20 @@
    COMMENT ON COLUMN "POST"."REWARDS" IS '悬赏分';
  
    COMMENT ON COLUMN "POST"."NAME" IS '发布人姓名';
+ 
+   COMMENT ON COLUMN "POST"."ACCEPT_ID" IS '采纳回复ID';
 REM INSERTING into POST
 SET DEFINE OFF;
-Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME) values (2,'<p>test</p>','test',to_date('26-5月 -17','DD-MON-RR'),'["10500","15100"]',106,0,0,1,3,to_date('26-5月 -17','DD-MON-RR'),25,'lyk');
-Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME) values (3,'<p>dsgsdgsdgggggggggggggggggggggggggggggggggggg</p>','111111',to_date('26-5月 -17','DD-MON-RR'),'[]',7,1,0,1,3,to_date('26-5月 -17','DD-MON-RR'),50,'lyk111');
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (2,'<p>test</p>','test',to_date('26-5月 -17','DD-MON-RR'),'["10500","15100"]',182,1,0,2,3,to_date('29-5月 -17','DD-MON-RR'),25,'lyk',0,1);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (6,'<p>11111</p>','测试发帖得分',to_date('28-5月 -17','DD-MON-RR'),'["10450"]',52,2,0,3,3,to_date('29-5月 -17','DD-MON-RR'),10,'lyk111',0,2);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (22,'<p>11111111111111</p>','测试',to_date('05-6月 -17','DD-MON-RR'),'["15150"]',0,0,0,1,3,to_date('05-6月 -17','DD-MON-RR'),50,'lyk111',0,0);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (23,'<p>11111111111111</p>','测试',to_date('05-6月 -17','DD-MON-RR'),'["15150"]',9,2,0,3,3,to_date('05-6月 -17','DD-MON-RR'),50,'lyk111',0,1);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (3,'<p>dsgsdgsdgggggggggggggggggggggggggggggggggggg</p>','111111',to_date('26-5月 -17','DD-MON-RR'),'[]',282,8,0,9,3,to_date('29-5月 -17','DD-MON-RR'),50,'lyk111',32,8);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (10,'<p>111</p>','111',to_date('29-5月 -17','DD-MON-RR'),'["10450"]',35,0,1,1,2,to_date('29-5月 -17','DD-MON-RR'),50,'test2',0,0);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (21,'<p>11111111111111</p>','测试',to_date('05-6月 -17','DD-MON-RR'),'["15150"]',0,0,0,1,3,to_date('05-6月 -17','DD-MON-RR'),50,'lyk111',0,0);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (4,'<p>测试发帖得分</p>','测试发帖得分',to_date('28-5月 -17','DD-MON-RR'),'["15100"]',11,1,0,2,3,to_date('05-6月 -17','DD-MON-RR'),11,'lyk111',0,1);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (5,'<p>111</p>','测试发帖得分',to_date('28-5月 -17','DD-MON-RR'),'["10400"]',11,1,0,2,3,to_date('05-6月 -17','DD-MON-RR'),25,'lyk111',0,1);
+Insert into POST (ID,CONTENT,TITLE,POST_TIME,TAGS,VIEWS,REPLYS,STATUS,FLOOR,POST_USER,UPDATE_TIME,REWARDS,NAME,ACCEPT_ID,REMINDER) values (11,'<p>52525252525</p>','222',to_date('29-5月 -17','DD-MON-RR'),'["10450"]',20,1,1,2,3,to_date('05-6月 -17','DD-MON-RR'),50,'lyk111',0,0);
 --------------------------------------------------------
 --  DDL for Index POST_PK
 --------------------------------------------------------

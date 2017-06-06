@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期日-五月-28-2017   
+--  文件已创建 - 星期二-六月-06-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table REPLY_HELP
@@ -27,9 +27,13 @@
 REM INSERTING into REPLY_HELP
 SET DEFINE OFF;
 Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (26,3,to_date('27-5月 -17','DD-MON-RR'),1);
+Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (27,3,to_date('28-5月 -17','DD-MON-RR'),2);
 Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (23,3,to_date('27-5月 -17','DD-MON-RR'),1);
 Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (24,3,to_date('27-5月 -17','DD-MON-RR'),1);
+Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (24,2,to_date('28-5月 -17','DD-MON-RR'),1);
 Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (25,3,to_date('27-5月 -17','DD-MON-RR'),2);
+Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (23,2,to_date('28-5月 -17','DD-MON-RR'),1);
+Insert into REPLY_HELP (REPLY_ID,USER_ID,CREATE_TIME,IS_GOOD) values (27,2,to_date('28-5月 -17','DD-MON-RR'),2);
 --------------------------------------------------------
 --  DDL for Index REPLY_HELP_PK
 --------------------------------------------------------
