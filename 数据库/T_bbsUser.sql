@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  文件已创建 - 星期三-五月-24-2017   
+--  文件已创建 - 星期一-五月-29-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table BBS_USER
@@ -8,15 +8,18 @@
   CREATE TABLE "BBS_USER" 
    (	"ID" NUMBER(10,0), 
 	"NICKNAME" VARCHAR2(14 BYTE), 
-	"SEX" NUMBER(1,0), 
+	"SEX" NUMBER(1,0) DEFAULT (null), 
 	"TELEPHONE" VARCHAR2(20 BYTE), 
 	"BIRTHDAY" DATE, 
 	"Q_MAJOR" VARCHAR2(1800 BYTE) DEFAULT '[]', 
 	"Q_PARTICIPATE" VARCHAR2(1800 BYTE) DEFAULT '[]', 
 	"AQ_CNT" NUMBER(8,0) DEFAULT 0, 
-	"FOLLOW" VARCHAR2(20 BYTE) DEFAULT '[]', 
-	"I_CONTACT" VARCHAR2(200 BYTE) DEFAULT '[]', 
-	"I_ADDRESS" VARCHAR2(200 BYTE) DEFAULT '[]'
+	"FOLLOW" VARCHAR2(20 BYTE) DEFAULT (null), 
+	"I_CONTACT" VARCHAR2(200 BYTE) DEFAULT '{}', 
+	"I_ADDRESS" VARCHAR2(200 BYTE) DEFAULT '{}', 
+	"PROTRAIT_URL" VARCHAR2(50 BYTE), 
+	"SETTING" VARCHAR2(100 BYTE) DEFAULT (null), 
+	"SCORE" NUMBER(6,0) DEFAULT 0
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -43,11 +46,18 @@
    COMMENT ON COLUMN "BBS_USER"."I_CONTACT" IS '联系方式';
  
    COMMENT ON COLUMN "BBS_USER"."I_ADDRESS" IS '联系地址';
+ 
+   COMMENT ON COLUMN "BBS_USER"."PROTRAIT_URL" IS '头像url';
+ 
+   COMMENT ON COLUMN "BBS_USER"."SETTING" IS '设置';
+ 
+   COMMENT ON COLUMN "BBS_USER"."SCORE" IS '用户积分';
 REM INSERTING into BBS_USER
 SET DEFINE OFF;
-Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS) values (3,'lyk',1,null,null,'[{"index":10100,"percent":0.667},{"index":30000,"percent":0.333}]','[{"index":20100,"percent":0.333},{"index":25050,"percent":0.333},{"index":10100,"percent":0.333},{"index":10500,"percent":0.167},{"index":30100,"percent":0.167},{"index":30000,"percent":0.167}]',6,'[0,0]','[]','[]');
-Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS) values (1,'test1',0,null,null,'[]','[]',0,'[0,0]','[]','[]');
-Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS) values (2,'test2',1,null,null,'[]','[{"index":15150,"percent":0.444},{"index":15100,"percent":0.222},{"index":10050,"percent":0.111},{"index":10000,"percent":0.111},{"index":10650,"percent":0.111},{"index":15200,"percent":0.111},{"index":10350,"percent":0.111}]',9,'[0,0]','[]','[]');
+Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS,PROTRAIT_URL,SETTING,SCORE) values (3,'lyk111',0,null,to_date('1994-03-06 00:00:00','YYYY-MM-DD HH24:MI:SS'),'[{"index":10100,"percent":0.667},{"index":30000,"percent":0.333}]','[{"index":20100,"percent":0.286},{"index":25050,"percent":0.286},{"index":10100,"percent":0.286},{"index":10500,"percent":0.143},{"index":30100,"percent":0.143},{"index":30000,"percent":0.143}]',7,'[0,0]','{"email":"511976839@qq.com","mobilephone":"13262797296","qq":"41234543"}','{"company":"育碧、骚尼","home":"昆明","school":"东华大学"}','/upload/1496037631481_lyk111_blob','{"messageRemind":1,"showActivity":0,"showInfo":0}',31);
+Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS,PROTRAIT_URL,SETTING,SCORE) values (1,'test1',0,null,null,'[]','[]',0,'[0,0]','[]','[]',null,'[]',0);
+Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS,PROTRAIT_URL,SETTING,SCORE) values (2,'test2',1,null,null,'[]','[{"index":15150,"percent":0.308},{"index":15100,"percent":0.154},{"index":10050,"percent":0.077},{"index":10500,"percent":0.077},{"index":10000,"percent":0.077},{"index":10650,"percent":0.077},{"index":15200,"percent":0.077},{"index":10350,"percent":0.077}]',13,'[0,0]','[]','[]','/upload/1495961040296_test2_blob','{"messageRemind":1,"showActivity":1,"showInfo":1}',74);
+Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,AQ_CNT,FOLLOW,I_CONTACT,I_ADDRESS,PROTRAIT_URL,SETTING,SCORE) values (100000040,'lqc2017',0,null,null,'[]','[]',0,'[0,0]','{}','{}','/upload/1496053469048_lqc2017_blob','{"messageRemind":1,"showActivity":1,"showInfo":1}',0);
 --------------------------------------------------------
 --  DDL for Index TABLE1_PK
 --------------------------------------------------------
@@ -78,8 +88,28 @@ Insert into BBS_USER (ID,NICKNAME,SEX,TELEPHONE,BIRTHDAY,Q_MAJOR,Q_PARTICIPATE,A
  
   ALTER TABLE "BBS_USER" MODIFY ("ID" NOT NULL ENABLE);
  
+  ALTER TABLE "BBS_USER" MODIFY ("NICKNAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "BBS_USER" MODIFY ("SEX" NOT NULL ENABLE);
+ 
+  ALTER TABLE "BBS_USER" MODIFY ("FOLLOW" NOT NULL ENABLE);
+ 
+  ALTER TABLE "BBS_USER" MODIFY ("SETTING" NOT NULL ENABLE);
+ 
   ALTER TABLE "BBS_USER" ADD CONSTRAINT "TABLE1_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TRIGGER_USER
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "TRIGGER_USER" 
+BEFORE INSERT ON BBS_USER 
+FOR EACH ROW 
+ WHEN (new.id is null) BEGIN
+  select sequence_user.nextval into :new.id from dual;
+END;
+/
+ALTER TRIGGER "TRIGGER_USER" ENABLE;
